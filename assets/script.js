@@ -1,8 +1,4 @@
-// console.log("it'sworking");
-// link to question
-var question_box = document.querySelector("questionspace");
 
-// carousel buttons
 var start = document.getElementById("startBtn");
 
 //index variables and fillers
@@ -18,57 +14,75 @@ var questionText=[
 
     {"question":"Question2?",
         "choices": ["A", "B", "C", "D"],
-        "answer": "B",
+        "answer": "C",
     }
 ];
 
+var userScore=0;
+
+var currentQ = 0;
 // create timer on start of start button
 start.addEventListener("click", function () {   
 
     var quizTimer= setInterval(function() {
         timeSec--; 
-            if (timeSec>0){
-                var displayTime= document.getElementById("timer");
-                displayTime.textContent = timeSec;
-            }
-            else {
-                clearInterval(quizTimer);
-                alert("Time is up.");
-            }
+        if (timeSec>0){
+            var displayTime= document.getElementById("timer");
+            displayTime.textContent = timeSec + " seconds left";
+        }
+        else {
+            clearInterval(quizTimer);
+            alert("Time is up.");
+            displayScore();
+        }
 
-            displayQ()
-
-        },1000);
-    });
+    },1000);
+    displayQ(currentQ);
+});
 
 var timeSec= 300;
 
-function displayQ(){
-console.log ("its working")
+var nxtQ= function nextQuestion() {
+    var answered = this.innerHTML;
+    var correctAns = questionText[currentQ].answer;
+    if (answered == correctAns){
+        userScore++;
+    }
+
+    currentQ++;
+    if(currentQ<questionText.length){
+        displayQ(currentQ);
+    } else{
+        displayScore();
+    }
+}
+
+var quest= document.getElementById("question");
+
+var answers=document.getElementById("answers");
+var answerBtns=[];
+
+for(var i=0; i<4; i++){
+    var ans=document.createElement("button");
+    ans.addEventListener("click", nxtQ)
+    answerBtns.push(ans);
+}
+
+
+function displayQ(j){
+
+    quest.textContent=questionText[j].question;
+
+    for(var i=0; i<4; i++){
+        answerBtns[i].textContent=questionText[j].choices[i];
+        answers.appendChild(answerBtns[i]);
+    }
+
 };
 
-//function to check if answer correct on selecting submit button
-function correctAnswer () {
-//   console.log('its working');
 
-
-}
-// navigation function
-function nextQuestion() {
-
-}
-
-// start.addEventListener("click", console.log("its working"));
-
-
-//function for display right or wrong after answer questions
-
-function rightWrong(){
-
-};
-
-//score sheet at the end
-
-function score(){
-
+function displayScore(){
+    var initials = prompt("What are your initials?");
+    var questspace=document.getElementById("questionspace");
+    questspace.innerHTML = initials+" : Your score is "+userScore;
 };
