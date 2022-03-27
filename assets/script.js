@@ -23,24 +23,25 @@ var questionText=[
 ];
 
 // create timer on start of start button
-function quizTimer() {
-    setInterval(function() {
-        timeSec--;
-        if (timeSec>0){
-            var displayTime= document.getElementById("timer");
-            displayTime.textContent = timeSec;
-        }
-        else {
-            clearInterval(quizTimer);
-            alert("Time is up.");
-        }
+start.addEventListener("click", function () {   
 
-        displayQ()
+    var quizTimer= setInterval(function() {
+        timeSec--; 
+            if (timeSec>0){
+                var displayTime= document.getElementById("timer");
+                displayTime.textContent = timeSec;
+            }
+            else {
+                clearInterval(quizTimer);
+                alert("Time is up.");
+            }
 
-    },1000);
-}
+            displayQ()
 
-var timeSec= 500;
+        },1000);
+    });
+
+var timeSec= 300;
 
 function displayQ(){
 console.log ("its working")
@@ -56,9 +57,6 @@ function correctAnswer () {
 function nextQuestion() {
 
 }
-
-// listener for the buttons
-start.addEventListener("onclick", ()=>quizTimer);
 
 // start.addEventListener("click", console.log("its working"));
 
