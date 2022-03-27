@@ -19,12 +19,15 @@ var questionText=[
 ];
 
 var userScore=0;
+var quizTimer;
 
 var currentQ = 0;
 // create timer on start of start button
 start.addEventListener("click", function () {   
 
-    var quizTimer= setInterval(function() {
+    start.style.visibility="hidden";
+
+    quizTimer= setInterval(function() {
         timeSec--; 
         if (timeSec>0){
             var displayTime= document.getElementById("timer");
@@ -47,6 +50,9 @@ var nxtQ= function nextQuestion() {
     var correctAns = questionText[currentQ].answer;
     if (answered == correctAns){
         userScore++;
+    }else{
+    //    quizTimer= timeSec- 15;
+    // need to figure out timer minus 15 seconds
     }
 
     currentQ++;
@@ -66,6 +72,7 @@ for(var i=0; i<4; i++){
     var ans=document.createElement("button");
     ans.addEventListener("click", nxtQ)
     answerBtns.push(ans);
+    // create break between buttons
 }
 
 
@@ -83,6 +90,7 @@ function displayQ(j){
 
 function displayScore(){
     var initials = prompt("What are your initials?");
+    // need to add form for initials instead of prompt
     var questspace=document.getElementById("questionspace");
     questspace.innerHTML = initials+" : Your score is "+userScore;
 };
