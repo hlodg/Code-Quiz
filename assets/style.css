@@ -8,3 +8,7 @@ header{
     text-align:right;
 }
 
+#questionspace button {
+    background-color: purple;
+    color:white;
+}

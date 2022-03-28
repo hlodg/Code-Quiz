@@ -1,20 +1,36 @@
 
 var start = document.getElementById("startBtn");
 
-//index variables and fillers
 var index=0;
 var nowQuestion;
+var linebreak = document.createElement("br");
+
 
 // question array
 var questionText=[
-    {"question":"Question1?",
-        "choices": ["A", "B", "C", "D"],
-        "answer": "B",
+    {"question":"How do you add a button in Javascript?",
+        "choices": ["textContent", "appendChild", "createElement", "style.visibility"],
+        "answer": "createElement",
     },
 
-    {"question":"Question2?",
-        "choices": ["A", "B", "C", "D"],
-        "answer": "C",
+    {"question":"Where do we put the script tag for javascript?",
+        "choices": ["HTML head", "HTML beginning of body", "script.js document", "HTML end of body"],
+        "answer": "HTML end of body",
+    },
+
+    {"question":"How do you create an alert in javascript?",
+        "choices": ["prompt", "alert", "form", "document.getElementbyId"],
+        "answer": "alert",
+    },
+
+    {"question":"Where could you find information about javascript?",
+        "choices": ["MDN schools", "W3schools", "freecodecamp", "All of the Above"],
+        "answer": "All of the Above",
+    },
+
+    {"question":"How do you create a function in javascript?",
+        "choices": ["function(){}", "func(){}", "call myFunction()", "declareFunction()"],
+        "answer": "function(){}",
     }
 ];
 
@@ -44,13 +60,16 @@ start.addEventListener("click", function () {
 });
 
 var timeSec= 300;
+var messageCorrect= document.getElementById("rightWrong");
 
 var nxtQ= function nextQuestion() {
     var answered = this.innerHTML;
     var correctAns = questionText[currentQ].answer;
     if (answered == correctAns){
         userScore++;
+        messageCorrect.textContent="Right!";
     }else{
+        messageCorrect.textContent="Wrong!";
     //    quizTimer= timeSec- 15;
     // need to figure out timer minus 15 seconds
     }
@@ -72,7 +91,6 @@ for(var i=0; i<4; i++){
     var ans=document.createElement("button");
     ans.addEventListener("click", nxtQ)
     answerBtns.push(ans);
-    // create break between buttons
 }
 
 
@@ -93,4 +111,5 @@ function displayScore(){
     // need to add form for initials instead of prompt
     var questspace=document.getElementById("questionspace");
     questspace.innerHTML = initials+" : Your score is "+userScore;
+    messageCorrect.style.visibility="hidden";
 };
