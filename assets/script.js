@@ -62,7 +62,7 @@ start.addEventListener("click", function () {
 var timeSec= 300;
 var messageCorrect= document.getElementById("rightWrong");
 
-var nxtQ= function nextQuestion() {
+function nextQuestion() {
     var answered = this.innerHTML;
     var correctAns = questionText[currentQ].answer;
     if (answered == correctAns){
@@ -70,7 +70,7 @@ var nxtQ= function nextQuestion() {
         messageCorrect.textContent="Right!";
     }else{
         messageCorrect.textContent="Wrong!";
-    //    quizTimer= timeSec- 15;
+        timeSec-=15;
     // need to figure out timer minus 15 seconds
     }
 
@@ -79,6 +79,7 @@ var nxtQ= function nextQuestion() {
         displayQ(currentQ);
     } else{
         displayScore();
+        // how do i stop timer?
     }
 }
 
@@ -89,7 +90,7 @@ var answerBtns=[];
 
 for(var i=0; i<4; i++){
     var ans=document.createElement("button");
-    ans.addEventListener("click", nxtQ)
+    ans.addEventListener("click", nextQuestion)
     answerBtns.push(ans);
 }
 
@@ -108,8 +109,9 @@ function displayQ(j){
 
 function displayScore(){
     var initials = prompt("What are your initials?");
-    // need to add form for initials instead of prompt
     var questspace=document.getElementById("questionspace");
     questspace.innerHTML = initials+" : Your score is "+userScore;
     messageCorrect.style.visibility="hidden";
 };
+
+// nextQuestion();

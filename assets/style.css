@@ -4,11 +4,15 @@
     text-align: center;
 }
 
-header{
-    text-align:right;
+
+#question {
+    font-size: 28px;
 }
 
 #questionspace button {
     background-color: purple;
     color:white;
+    font-size: 18px;
+    margin: 10px 37%;
+    display:flex;
 }
