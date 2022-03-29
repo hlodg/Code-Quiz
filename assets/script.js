@@ -1,9 +1,7 @@
 
 var start = document.getElementById("startBtn");
-
 var index=0;
 var nowQuestion;
-var linebreak = document.createElement("br");
 var timeSec= 300;
 var messageCorrect= document.getElementById("rightWrong");
 var userScore=0;
@@ -12,6 +10,9 @@ var currentQ = 0;
 var quest= document.getElementById("question");
 var answers=document.getElementById("answers");
 var answerBtns=[];
+var scores=[];
+var scoresHigh=document.getElementById("highscore")
+var initials;
 
 // question array
 var questionText=[
@@ -61,6 +62,7 @@ start.addEventListener("click", function () {
         }
 
     },1000);
+    
     displayQ(currentQ);
 });
 
@@ -104,10 +106,23 @@ function displayQ(j){
 
 };
 
+
+var scoreObj= {
+    initials:initials,
+    score: userScore,
+}
+
 // Creates display score function and initial recorded in the final page
 function displayScore(){
+    initials = prompt("What are your initials?");
+
+    // quizTimer.style.visibility="hidden";
+
     var questspace=document.getElementById("questionspace");
-    questspace.innerHTML = initials+" : Your score is "+userScore;
+    questspace.innerHTML = initials + " : Your score is " + userScore;
+
     messageCorrect.style.visibility="hidden";
-    var initials = prompt("What are your initials?");
+
 };
+
+scoresHigh.innerHTML(scoreObj);

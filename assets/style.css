@@ -4,6 +4,11 @@
     text-align: center;
 }
 
+header{
+    display:flex;
+    justify-content: right;
+}
+
 
 #question {
     font-size: 28px;
