@@ -4,7 +4,14 @@ var start = document.getElementById("startBtn");
 var index=0;
 var nowQuestion;
 var linebreak = document.createElement("br");
-
+var timeSec= 300;
+var messageCorrect= document.getElementById("rightWrong");
+var userScore=0;
+var quizTimer;
+var currentQ = 0;
+var quest= document.getElementById("question");
+var answers=document.getElementById("answers");
+var answerBtns=[];
 
 // question array
 var questionText=[
@@ -34,15 +41,13 @@ var questionText=[
     }
 ];
 
-var userScore=0;
-var quizTimer;
-
-var currentQ = 0;
 // create timer on start of start button
 start.addEventListener("click", function () {   
 
+    //hides start button after the click event
     start.style.visibility="hidden";
 
+    // creates time function and displays it in the header.
     quizTimer= setInterval(function() {
         timeSec--; 
         if (timeSec>0){
@@ -59,9 +64,7 @@ start.addEventListener("click", function () {
     displayQ(currentQ);
 });
 
-var timeSec= 300;
-var messageCorrect= document.getElementById("rightWrong");
-
+// creates a function that displays the next question and scores when right or wrong
 function nextQuestion() {
     var answered = this.innerHTML;
     var correctAns = questionText[currentQ].answer;
@@ -71,7 +74,6 @@ function nextQuestion() {
     }else{
         messageCorrect.textContent="Wrong!";
         timeSec-=15;
-    // need to figure out timer minus 15 seconds
     }
 
     currentQ++;
@@ -83,18 +85,14 @@ function nextQuestion() {
     }
 }
 
-var quest= document.getElementById("question");
-
-var answers=document.getElementById("answers");
-var answerBtns=[];
-
+// creates the answer buttons and displays the array in the buttons.
 for(var i=0; i<4; i++){
     var ans=document.createElement("button");
     ans.addEventListener("click", nextQuestion)
     answerBtns.push(ans);
 }
 
-
+// creates the question within the  question space. Appends the answers to the question
 function displayQ(j){
 
     quest.textContent=questionText[j].question;
@@ -106,12 +104,10 @@ function displayQ(j){
 
 };
 
-
+// Creates display score function and initial recorded in the final page
 function displayScore(){
-    var initials = prompt("What are your initials?");
     var questspace=document.getElementById("questionspace");
     questspace.innerHTML = initials+" : Your score is "+userScore;
     messageCorrect.style.visibility="hidden";
+    var initials = prompt("What are your initials?");
 };
-
-// nextQuestion();
