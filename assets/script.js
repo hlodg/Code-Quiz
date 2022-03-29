@@ -106,17 +106,32 @@ function displayQ(j){
 
 };
 
+// var scores=window.localStorage.scoreObj
 
-var scoreObj= {
-    initials:initials,
-    score: userScore,
-}
+
 
 // Creates display score function and initial recorded in the final page
 function displayScore(){
+    
+    clearInterval(quizTimer);
+
     initials = prompt("What are your initials?");
 
-    // quizTimer.style.visibility="hidden";
+    var scoreObj= {
+        initials:initials,
+        score: userScore,
+    };
+
+    var scoreArr=[];
+    var storageItem= JSON.parse(localStorage.getItem("scores"));
+
+    if(storageItem){
+        storageItem.push(scoreObj);
+        localStorage.setItem("scores", JSON.stringify(storageItem));
+    } else{
+        scoreArr.push(scoreObj);
+        localStorage.setItem("scores", JSON.stringify(scoreArr));
+    }
 
     var questspace=document.getElementById("questionspace");
     questspace.innerHTML = initials + " : Your score is " + userScore;
@@ -125,4 +140,3 @@ function displayScore(){
 
 };
 
-scoresHigh.innerHTML(scoreObj);
