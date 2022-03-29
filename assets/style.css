@@ -21,3 +21,8 @@ header{
     margin: 10px 37%;
     display:flex;
 }
+
+footer{
+    display:block;
+    Justify-content: center;
+}
